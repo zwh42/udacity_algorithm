@@ -1,8 +1,16 @@
+class Node:
+    
+    def __init__(key, value):
+        self.key = key
+        self.value = value
+        self.pre = None
+        self.next = None 
+
 class LRU_Cache(object):
 
     def __init__(self, capacity):
         # Initialize class variables
-        pass
+        self.hash_map = dict()
 
     def get(self, key):
         # Retrieve item from provided key. Return -1 if nonexistent. 
