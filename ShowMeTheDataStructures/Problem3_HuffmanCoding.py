@@ -93,11 +93,11 @@ def build_huffman_tree(frequency_list):
         if len(frequency_list) >= 2:
             temp = frequency_list.pop(0)
             left = Node(temp[0], temp[1])
-            print(left)
+            #print(left)
             temp = frequency_list.pop(0)
             right = Node(temp[0], temp[1])
-            print(right)
-            print("remaining size:", len(frequency_list))
+            #print(right)
+            #print("remaining size:", len(frequency_list))
             parent = Node(None, left.frequency + right.frequency)
             parent.left_child = left
             parent.right_child = right
