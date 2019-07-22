@@ -1,10 +1,11 @@
 import os
 class FindFiles:
 
-    def __init__(self, suffix, path):
+    def __init__(self):
         #self.suffix = suffix
         #self.path = path
         self.found_file_list = []
+
     
     def traverse(self, suffix, path):
         file_list, dir_list = self.seprate_file_and_dir(path)
@@ -15,6 +16,12 @@ class FindFiles:
             self.traverse(suffix, dir)
     
     def find_files(self, suffix, path):
+        if not os.path.isdir(path):
+            raise Exception("{} is not a valid directory!".format(path))
+        
+        if suffix == "":
+            raise Exception("input suffix is empty!")
+        
         self.traverse(suffix, path)
 
         return self.found_file_list
@@ -43,9 +50,10 @@ class FindFiles:
 
 
 if __name__ == "__main__":
+    print("\ntest case 1:\n")
     test_path = r"./testdir/"
     test_suffix = r".c"
-    Test = FindFiles(test_suffix, test_path)
+    Test = FindFiles()
     found_file_list = Test.find_files(test_suffix, test_path)
 
     truth_list = []
@@ -58,4 +66,18 @@ if __name__ == "__main__":
     print(truth_list)
 
     assert sorted(found_file_list) == sorted(truth_list)
-    
+
+
+    print("\ntest case 2")
+    test_path = r"non/exist/path"
+    test_suffix = r".h"
+    Test = FindFiles()
+    found_file_list = Test.find_files(test_suffix, test_path)
+
+
+    print("\ntest case 3")
+    test_path = r"./testdir/"
+    test_suffix = ""
+    Test = FindFiles()
+    found_file_list = Test.find_files(test_suffix, test_path)
+     
