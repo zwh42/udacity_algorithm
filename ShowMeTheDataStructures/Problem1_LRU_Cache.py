@@ -36,6 +36,9 @@ class LRU_Cache(object):
 
     def set(self, key, value):
         # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item. 
+        if self.capacity <= 0:
+            raise Exception("cache's capacity mush > 0 !")
+        
         if self.get(key) == -1:
             node = Node(key, value)
             
@@ -88,7 +91,7 @@ class LRU_Cache(object):
 
     def __repr__(self):
         
-        result = "capacitcy = {}, size = {}\n".format(self.capacity, self.size)
+        result = "cache:\ncapacitcy = {}, size = {}\n".format(self.capacity, self.size)
         result += "hash: " + str(self.hash_map) + "\n"
         result += "linked list (from top to bottom):\n"
         t = self.head
@@ -104,48 +107,43 @@ class LRU_Cache(object):
 
 if __name__ == "__main__":
     
+    # test case 1
+    print("test case 1:\n")
     our_cache = LRU_Cache(5)
-
-    print(our_cache)
-
-
-    our_cache.set(1, 1)
-    
-    print(our_cache)
-
-
+    our_cache.set(1, 1)    
     our_cache.set(2, 2)
-    print(our_cache)
- 
     our_cache.set(3, 3)
-
-    print(our_cache)
-
-
     our_cache.set(4, 4)
-
     print(our_cache)
-
-    print("1, 2, 3, 4 inserted")
-    
-    print("get(1)")
+    print("1, 2, 3, 4 inserted")    
+    #print("get(1)")
     assert our_cache.get(1) == 1       # returns 1
-    
-    print("get(2)")
+    #print("get(2)")
     print(our_cache)
     assert our_cache.get(2) == 2      # returns 2
-    
-    
-    print("get(9)")
+    #print("get(9)")
     print(our_cache)
     assert our_cache.get(9) == -1      # returns -1 because 9 is not present in the cache
-
-    print("set(5)")
+    #print("set(5)")
     our_cache.set(5, 5) 
     print(our_cache)
-    
-    print("set(6)")
+    #print("set(6)")
     our_cache.set(6, 6)
     print(our_cache)
-
     assert our_cache.get(3) == -1      # returns -1 because the cache reached it's capacity and 3 was the least recently used entry
+
+    # test case 2
+    print("\ntest case 2:\n")
+    our_cache = LRU_Cache(2)
+    our_cache.set(1, 1)
+    our_cache.set(2, 2)
+    our_cache.set(1, 10)
+    print(our_cache)
+    assert our_cache.get(1) == 10
+    assert our_cache.get(2) == 2
+
+    # test case 3
+    our_cache = LRU_Cache(0)
+    our_cache.set(1, 1)
+    print(our_cache.get(1))
+    
