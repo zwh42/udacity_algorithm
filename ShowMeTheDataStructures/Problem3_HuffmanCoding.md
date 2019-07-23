@@ -12,7 +12,11 @@
    utilize the built huffman tree to traverse the encoded data
 
 ## Time Complexity Analysis
-In the encoding function, to create the sorted char tuple list is O(nlogn).To build the huffman tree is O(n)
+In the encoding function, to create the sorted char tuple list is O(nlogn).To build the huffman tree is O(n).  
+In the decoding function, it's O(n)
 
-In the decoding function, it's O(n) 
+## Space Complexity Analysis
+In the encoding function, the space complexity is O(n).
+
+For the decoding function, the sapce complexity is also O(n).  
 

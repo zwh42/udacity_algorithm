@@ -43,6 +43,8 @@ class LinkedList:
 
 def union(llist_1, llist_2):
     # Your Solution Here
+    if llist_1.size()  == 0 and llist_2.size() == 0:
+        return None
     if llist_1.size()  == 0:
         return llist_2
     if llist_2.size() == 0:
@@ -107,6 +109,7 @@ def intersection(llist_1, llist_2):
 
 if __name__ == "__main__":
     # Test case 1
+    print("test case 1:\n")
     linked_list_1 = LinkedList()
     linked_list_2 = LinkedList()
 
@@ -123,7 +126,7 @@ if __name__ == "__main__":
     print ("intersection:", intersection(linked_list_1,linked_list_2))
 
     # Test case 2
-
+    print("test case 2:\n")
     linked_list_3 = LinkedList()
     linked_list_4 = LinkedList()
 
@@ -136,5 +139,23 @@ if __name__ == "__main__":
     for i in element_2:
         linked_list_4.append(i)
 
-    print (union(linked_list_3,linked_list_4))
-    print (intersection(linked_list_3,linked_list_4))
+    print ("union: ", union(linked_list_3,linked_list_4))
+    print ("intersection:",intersection(linked_list_3,linked_list_4))
+
+
+    # Test case 3
+    print("test case 3:\n")
+    linked_list_3 = LinkedList()
+    linked_list_4 = LinkedList()
+
+    element_1 = []
+    element_2 = []
+
+    for i in element_1:
+        linked_list_3.append(i)
+
+    for i in element_2:
+        linked_list_4.append(i)
+
+    print ("union: ", union(linked_list_3,linked_list_4))
+    print ("intersection:", intersection(linked_list_3,linked_list_4))

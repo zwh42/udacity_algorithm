@@ -25,6 +25,8 @@ class BlockChain:
         self.tail = None
     
     def append(self, block):
+        if not isinstance(block, Block):
+            raise Exception("only Block can be added to blockchain!")
         if self.head is None:
             self.head = block
             self.head.next = None
@@ -39,6 +41,10 @@ class BlockChain:
     def __repr__(self):
         p = self.head
         repr_string = ""
+
+        if p is None:
+            return "Empty Block Chain."
+
         while p is not None:
             repr_string += "Block(time: {}, data: {}, hash: {}, previous hash: {})\n".format(p.timestamp, p.data, p.hash, p.previous_hash)
             p = p.next
@@ -48,13 +54,22 @@ class BlockChain:
 
 
 if __name__ == "__main__":
+    
+    print("test case 1:\n")
     block_chain = BlockChain()
     block_chain.append(Block(datetime.datetime.now().timestamp(), "Bitcoin", None))
     time.sleep(1)
     block_chain.append(Block(datetime.datetime.now().timestamp(), "EOS", None))
     time.sleep(2)
     block_chain.append(Block(datetime.datetime.now().timestamp(), "Doge", None))
+    print(block_chain)
 
-    print(block_chain) 
+    print("test case 2:\n")
+    block_chain = BlockChain()
+    print(block_chain)
+
+    print("test case 3:\n")
+    block_chain = BlockChain()
+    block_chain.append("no block") 
 
     

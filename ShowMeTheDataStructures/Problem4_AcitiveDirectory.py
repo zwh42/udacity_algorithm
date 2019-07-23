@@ -28,8 +28,12 @@ def is_user_in_group(user, group):
       user(str): user name/id
       group(class:Group): group to check user membership against
     """
-    if user is None:
+    if user is None or (not isinstance(user, str)):
         return False
+    
+    if not isinstance(group, Group) or group is None:
+        raise Exception("Invalid Group!")
+    
     
     if user in group.get_users():
         return True
@@ -56,7 +60,15 @@ if __name__ == "__main__":
     friend.add_user("tom")
 
     print("Assert:")
+    # test case 1
     assert is_user_in_group(sub_child_user, sub_child) == True
+    # test case 2
     assert is_user_in_group(sub_child_user, friend) == False
+
+    #test case 3
+    is_user_in_group("me", "not a group")
+
+    #test case 4
+    is_user_in_group("test")
     
 
