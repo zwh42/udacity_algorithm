@@ -17,10 +17,12 @@ class FindFiles:
     
     def find_files(self, suffix, path):
         if not os.path.isdir(path):
-            raise Exception("{} is not a valid directory!".format(path))
+            print("{} is not a valid directory!".format(path))
+            return
         
         if suffix == "":
-            raise Exception("input suffix is empty!")
+            print("input suffix is empty!")
+            return 
         
         self.traverse(suffix, path)
 

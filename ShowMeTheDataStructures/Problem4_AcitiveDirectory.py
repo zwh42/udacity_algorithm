@@ -32,7 +32,8 @@ def is_user_in_group(user, group):
         return False
     
     if not isinstance(group, Group) or group is None:
-        raise Exception("Invalid Group!")
+        print("Invalid Group!")
+        return
     
     
     if user in group.get_users():
@@ -72,3 +73,4 @@ if __name__ == "__main__":
     is_user_in_group("test")
     
 
+    

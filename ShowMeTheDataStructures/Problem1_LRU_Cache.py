@@ -37,7 +37,8 @@ class LRU_Cache(object):
     def set(self, key, value):
         # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item. 
         if self.capacity <= 0:
-            raise Exception("cache's capacity mush > 0 !")
+            print("cache's capacity mush > 0 !")
+            return 
         
         if self.get(key) == -1:
             node = Node(key, value)
@@ -147,3 +148,4 @@ if __name__ == "__main__":
     our_cache.set(1, 1)
     print(our_cache.get(1))
     
+ 

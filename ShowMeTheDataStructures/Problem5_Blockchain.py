@@ -26,7 +26,7 @@ class BlockChain:
     
     def append(self, block):
         if not isinstance(block, Block):
-            raise Exception("only Block can be added to blockchain!")
+            print("only Block can be added to blockchain!")
         if self.head is None:
             self.head = block
             self.head.next = None
