@@ -17,60 +17,66 @@ def rotated_array_search(input_list, number):
 
     def find_pivot_index(input_list, start, end):
         
-       
-        #print("sublist", input_list[start:end + 1])
-        
-        if start >= end:
+        if start > end:
             return -1
         
         mid = (start + end) // 2
-        
-        #print("start:", start, "end:", end, "mid: ", mid, "length:", len(input_list))
-        #print(input_list[mid - 1] > input_list[mid])
 
-        if mid - 1 >= 0 and input_list[mid - 1] > input_list[mid]:
-            return mid
-        else:
-            pivot_index = find_pivot_index(input_list, start, mid - 1)
-            if pivot_index >= 0:
-                return pivot_index
+        if mid - 1 >= 0:            
+            if input_list[mid - 1] > input_list[mid]:
+                return mid
+            else:
+                pivot_index = 0
+                
+                temp = find_pivot_index(input_list, start, mid - 1)
+                if temp > 0:
+                    pivot_index = temp
+                
+                temp = find_pivot_index(input_list, mid + 1, end)
+                if temp > 0:
+                    pivot_index = temp
             
-            pivot_index = find_pivot_index(input_list, mid, end + 1)
-            if pivot_index >= 0:
+                
                 return pivot_index
+        else:
+            return -1
+        
+        
         
 
-    def binary_search(input_list, number, start, end):
-        if start >= end:
+    def binary_search(input_list,  start, end, number):
+       
+        if start > end:
             return -1
 
         mid = (start + end) // 2
-
-        print(input_list)
-        print("start = {}, end = {}, mid = {}".format(start, end, mid))
-
         if number == input_list[mid]:
             return mid
         elif number < input_list[mid]:
-            binary_search(input_list, start, mid - 1, number)
+            return binary_search(input_list, start, mid - 1, number)
         else:
-            binary_search(input_list, mid + 1, end, number)
+            return binary_search(input_list, mid + 1, end, number)
 
 
     start = 0
     end = len(input_list) - 1
     pivot_index = find_pivot_index(input_list, start, end)
-    print("{}, pivot index: {}".format(input_list, pivot_index))
 
-    left = binary_search(input_list[:pivot_index], start, pivot_index - 2, number)
-    right = binary_search(input_list[pivot_index:], pivot_index, end, number)    
+    #print("input list: ", input_list, "pivot index: ", pivot_index)
 
+    if pivot_index < 0:
+        pivot_index = 0
+
+    left = binary_search(input_list[:pivot_index], 0, len(input_list[:pivot_index]) - 1, number)
+    right = pivot_index + binary_search(input_list[pivot_index:], 0, len(input_list[pivot_index:]) -1, number)    
+
+    match_index = -1
     if left >= 0:
-        return left
-    elif right >= 0:
-        return right
-    else:
-        return -1
+        match_index = left
+    elif right >= pivot_index:
+        match_index = right
+
+    return match_index
 
 
 
@@ -102,3 +108,5 @@ test_function([[], 10])
 test_function([[1], 10])
 test_function([[10], 10])
 test_function([[1, 2], 10])
+test_function([[1, 2], 1])
+test_function([[1, 2], 2])
