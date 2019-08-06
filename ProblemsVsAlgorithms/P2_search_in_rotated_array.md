@@ -1,0 +1,4 @@
+# Search in a Rotated Array
+
+---
+Since the required time complexity is O(log(n)), a natural choice is a binary search like algorithm. We can notice that the rotated array is a combination of two sorted arrays. Thus, if we can find a way to separate the two sorted arrays, we can then run binary search on both arrays, problem solved. One way to separate the two sorted array is to find the pivot, which is at the boundary of the two arrays. Again, it can be done in a binary search manner with some modifications. In this way, the time complexity is O(log(n)) for the pivot search is also satisfied. Therefore the total  time complexity is O(log(n)). No extra space corresponding to input size **n** is needed with this method, the space complexity is O(1).   
